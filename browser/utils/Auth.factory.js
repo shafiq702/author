@@ -21,6 +21,12 @@ app.factory('AuthFactory', function($http, $rootScope){
 			return;
 		});
 	};
+
+	auth.logout = function(){
+		return $http.put(auth.url + "logout")
+		.then(function(data){
+			return;
+		})
+	};
 	return auth;
-}
-);
+});

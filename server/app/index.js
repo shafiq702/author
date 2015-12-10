@@ -2,17 +2,24 @@
 
 var app = require('express')();
 var path = require('path');
+var session = require('express-session');
 
 app.use(require('./logging.middleware'));
 
-app.use(function(req, res, next){
-	console.log(req.path)
-	next()
-})
+app.use(session({
+    // this mandatory configuration ensures that session IDs are not predictable
+    secret: 'shafiqiscool'
+}));
 
 app.use(require('./requestState.middleware'));
 
 app.use(require('./statics.middleware'));
+
+app.use(function (req, res, next) {
+	console.log("session ", req.session.userId)
+	// if(!req.session.userId) req.session.userId = req.body;
+  next();
+});
 
 app.use('/api', require('../api/api.router'));
 

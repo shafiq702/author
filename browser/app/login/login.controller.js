@@ -6,4 +6,7 @@ app.controller('LoginCtrl', function ($scope, AuthFactory) {
 		var password = $scope.login.password;
 		AuthFactory.login(email, password);
 	};
+	$scope.logout = function(){
+		AuthFactory.logout();
+	}
 });
