@@ -7,14 +7,13 @@ var HttpError = require('../../utils/HttpError');
 var User = require('../users/user.model');
 
 router.post('/', function (req, res, next) {
-	User.create(req.body)
-	.then(function (user) {
-		console.log('in login post');
-		res.status(200).json(user);
+	User.findOne(req.body.email)
+	.then(function(userEmail){
+		res.status(200).json(userEmail);
 	})
-	.then(null, function(){
-		res.status(401);
-	});
+	.then(null, function(err){
+		res.status(401)
+	})
 });
 
 module.exports = router;

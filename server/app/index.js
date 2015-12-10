@@ -1,9 +1,14 @@
-'use strict'; 
+'use strict';
 
 var app = require('express')();
 var path = require('path');
 
 app.use(require('./logging.middleware'));
+
+app.use(function(req, res, next){
+	console.log(req.path)
+	next()
+})
 
 app.use(require('./requestState.middleware'));
 

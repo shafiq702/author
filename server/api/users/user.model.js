@@ -1,4 +1,4 @@
-'use strict'; 
+'use strict';
 
 var mongoose = require('mongoose'),
 	shortid = require('shortid'),
@@ -48,6 +48,11 @@ var User = new mongoose.Schema({
 		default: false
 	}
 });
+
+User.pre("validate", function(next){
+	console.log('validating')
+	next();
+})
 
 User.methods.getStories = function () {
 	return Story.find({author: this._id}).exec();

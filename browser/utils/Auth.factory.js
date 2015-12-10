@@ -1,20 +1,22 @@
 'use strict';
 
-app.factory('Auth', function($http, $rootScope){
+app.factory('AuthFactory', function($http, $rootScope){
 	var auth = {};
 
 	auth.url = '/api/';
 
-	auth.signup = function(){
-		return $http.post(auth.url + "signup")
+	auth.signup = function(email, password){
+		return $http.post(auth.url + "signup", {email: email, password: password})
 		.then(function(data){
-			console.log("signup method");
 			return;
+		})
+		.then(null, function(err){
+			console.log(err);
 		});
 	};
 
-	auth.login = function(){
-		return $http.post(auth.url + "login")
+	auth.login = function(email, password){
+		return $http.post(auth.url + "login", {email: email, password: password})
 		.then(function(data){
 			return;
 		});
