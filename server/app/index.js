@@ -3,13 +3,18 @@
 var app = require('express')();
 var path = require('path');
 var session = require('express-session');
+var passport = require('passport');
 
 app.use(require('./logging.middleware'));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(session({
     // this mandatory configuration ensures that session IDs are not predictable
     secret: 'shafiqiscool'
 }));
+
 
 app.use(require('./requestState.middleware'));
 
